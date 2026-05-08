@@ -22,16 +22,28 @@
     --shadow: 0 8px 24px rgba(0,0,0,0.25);
   }
   *{ box-sizing: border-box; }
-  html, body{ margin:0; padding:0; }
+  html, body{ margin:0; padding:0; overflow-x: hidden; }
   body{
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     color: var(--text);
-    background:
-      radial-gradient(1200px 600px at 50% -10%, rgba(56,189,248,0.18), transparent 60%),
-      radial-gradient(800px 500px at 90% 110%, rgba(129,140,248,0.18), transparent 60%),
-      linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+    background: var(--bg-1);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: 
+      radial-gradient(circle at 20% 30%, rgba(56,189,248,0.15), transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(129,140,248,0.15), transparent 40%);
+    z-index: -1;
+    animation: pulseBg 10s ease-in-out infinite alternate;
+  }
+  @keyframes pulseBg {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.1); opacity: 1; }
   }
   .page{
     max-width: 480px;
@@ -41,6 +53,11 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    animation: fadeIn 0.8s ease-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
   .avatar-wrap{
     position: relative;
@@ -50,6 +67,10 @@
     background: linear-gradient(135deg, var(--accent), var(--accent-2));
     box-shadow: var(--shadow);
     margin-bottom: 18px;
+    transition: transform 0.3s ease;
+  }
+  .avatar-wrap:hover {
+    transform: scale(1.05) rotate(3deg);
   }
   .avatar{
     width: 100%; height: 100%;
@@ -58,14 +79,6 @@
     background: #1e293b;
     display: block;
     border: 3px solid var(--bg-1);
-  }
-  .avatar-placeholder{
-    width: 100%; height: 100%;
-    border-radius: 50%;
-    border: 3px solid var(--bg-1);
-    background: linear-gradient(135deg, #1e293b, #334155);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 48px; font-weight: 700; color: var(--text-soft);
   }
   .name{
     font-size: 24px; font-weight: 700;
@@ -88,6 +101,12 @@
     border-radius: 999px;
     background: var(--card);
     border: 1px solid var(--card-border);
+    transition: all 0.3s ease;
+  }
+  .tool:hover {
+    background: var(--accent);
+    color: var(--bg-1);
+    transform: translateY(-2px);
   }
   .links{ width: 100%; display: flex; flex-direction: column; gap: 10px; }
   .link{
@@ -98,22 +117,41 @@
     border-radius: 14px;
     color: var(--text); text-decoration: none;
     font-weight: 600; font-size: 15px;
-    transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     -webkit-tap-highlight-color: transparent;
+    opacity: 0;
+    animation: slideIn 0.5s ease-out forwards;
   }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  .link:nth-child(1) { animation-delay: 0.1s; }
+  .link:nth-child(2) { animation-delay: 0.2s; }
+  .link:nth-child(3) { animation-delay: 0.3s; }
+  .link:nth-child(4) { animation-delay: 0.4s; }
+  .link:nth-child(5) { animation-delay: 0.5s; }
+  .link:nth-child(6) { animation-delay: 0.6s; }
+  .link:nth-child(7) { animation-delay: 0.7s; }
+  .link:nth-child(8) { animation-delay: 0.8s; }
+  .link:nth-child(9) { animation-delay: 0.9s; }
+
   .link:hover, .link:focus-visible{
-    background: rgba(255,255,255,0.10);
-    border-color: rgba(255,255,255,0.18);
-    transform: translateY(-1px);
+    background: rgba(255,255,255,0.12);
+    border-color: var(--accent);
+    transform: scale(1.02);
     outline: none;
+    box-shadow: 0 4px 12px rgba(56,189,248,0.15);
   }
-  .link:active{ transform: translateY(0); }
+  .link:active{ transform: scale(0.98); }
   .icon{
     width: 36px; height: 36px;
     border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
+    transition: transform 0.3s ease;
   }
+  .link:hover .icon { transform: rotate(10deg); }
   .icon svg{ width: 20px; height: 20px; display: block; }
   .icon.whatsapp { background: #25D366; }
   .icon.instagram{ background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
@@ -122,8 +160,9 @@
   .icon.github   { background: #24292e; }
   .icon.scholar  { background: #4285F4; }
   .icon.email    { background: #EA4335; }
+  .icon.courses  { background: var(--accent-2); }
   .arrow{ margin-left: auto; color: var(--text-muted); flex-shrink: 0; opacity: 0.7; }
-  .footer{ margin-top: 36px; font-size: 12px; color: var(--text-muted); text-align: center; }
+  .footer{ margin-top: 48px; font-size: 12px; color: var(--text-muted); text-align: center; }
   .footer .brand{ color: var(--text-soft); font-weight: 600; }
   @media (max-width: 360px){
     .avatar-wrap{ width: 140px; height: 140px; }
@@ -155,6 +194,14 @@
     </div>
 
     <nav class="links" aria-label="Redes sociales">
+
+      <a class="link" href="https://trabajocientifico.github.io/cursos/" target="_blank" rel="noopener">
+        <span class="icon courses" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM3.89 9.5l8.11 4.42 8.11-4.42-8.11-4.42L3.89 9.5zM12 15.5l-7-3.82v3.32l7 3.82 7-3.82v-3.32l-7 3.82z"/></svg>
+        </span>
+        <span>Cursos Gratuitos</span>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </a>
 
       <a class="link" href="https://chat.whatsapp.com/GhF8Q1NkdP07CsZGwDAoJu" target="_blank" rel="noopener">
         <span class="icon whatsapp" aria-hidden="true">
