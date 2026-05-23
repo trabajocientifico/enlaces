@@ -88,8 +88,17 @@
   .credentials{
     font-size: 15px; font-weight: 500;
     color: var(--text-soft);
-    margin: 0 0 14px; line-height: 1.5;
+    margin: 0 0 10px; line-height: 1.5;
   }
+  .email-link{
+    display: inline-block;
+    font-size: 14px; font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    margin-bottom: 14px;
+    transition: color 0.2s ease;
+  }
+  .email-link:hover{ color: var(--accent-2); text-decoration: underline; }
   .tools{
     display: flex; flex-wrap: wrap; justify-content: center;
     gap: 6px 8px; margin-bottom: 28px;
@@ -161,6 +170,7 @@
   .icon.scholar  { background: #4285F4; }
   .icon.email    { background: #EA4335; }
   .icon.courses  { background: var(--accent-2); }
+  .icon.cv       { background: linear-gradient(135deg, #38bdf8, #818cf8); }
   .arrow{ margin-left: auto; color: var(--text-muted); flex-shrink: 0; opacity: 0.7; }
   .footer{ margin-top: 48px; font-size: 12px; color: var(--text-muted); text-align: center; }
   .footer .brand{ color: var(--text-soft); font-weight: 600; }
@@ -175,13 +185,15 @@
   <main class="page">
 
     <div class="avatar-wrap">
-      <img class="avatar" src="foto.png" alt="Oscar Ivan Vargas Pineda"
+      <img class="avatar" src="index/foto.png" alt="Oscar Ivan Vargas Pineda"
         onerror="this.outerHTML='<div class=&quot;avatar-placeholder&quot;>OV</div>'" />
     </div>
 
     <h1 class="name">Oscar Ivan Vargas Pineda</h1>
 
     <p class="credentials">PhD Ciencias · Científico de Datos · Docente Investigador</p>
+
+    <a class="email-link" href="mailto:oscarvargas@trabajocientifico.org">oscarvargas@trabajocientifico.org</a>
 
     <div class="tools">
       <span class="tool">IA</span>
@@ -194,6 +206,14 @@
     </div>
 
     <nav class="links" aria-label="Redes sociales">
+
+      <a class="link" href="index/perfil.html">
+        <span class="icon cv" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 12h8v2H8zm0 4h8v2H8z"/></svg>
+        </span>
+        <span>Curriculo</span>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </a>
 
       <a class="link" href="https://trabajocientifico.github.io/cursos/" target="_blank" rel="noopener">
         <span class="icon courses" aria-hidden="true">
@@ -248,14 +268,6 @@
           <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
         </span>
         <span>Google Scholar</span>
-        <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-      </a>
-
-      <a class="link" href="mailto:oscarvargas@trabajocientifico.org">
-        <span class="icon email" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </span>
-        <span>Email</span>
         <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
       </a>
 
